@@ -3,21 +3,38 @@ package TestClasses;
 import bankAccount.Account;
 import bankAccount.Users;
 
+import java.time.LocalTime;
+
 public class TransferOwnAccount {
 
 
-    public static void main(String[] args) {
 
-        Users u1 = new Users("Steven" , "Gerard",
-                "01/01/2000", "married" ,
+    public static void main(String[] args) throws InterruptedException {
+
+        Users u1 = new Users("Steve" , "Gerard",
+                "01/01/2000", "Married",
                 1000 , 2000);
 
 
-        u1.transfer(u1, u1);
+
+        u1.transfer(u1, u1, 0);
 
        Account ownAccount=new Account();
-        ownAccount.transferToOwnAccount(u1,100);
 
+        System.out.println(ownAccount.transferToOwnAccount(u1, 0));
+
+        int counter=5;
+
+        while (counter>=0) {
+            System.out.print("\rYour account report is getting prepared... " + counter);
+            counter--;
+            Thread.sleep(1000);
+
+        }
+
+
+        System.out.println();
+        System.out.println("*****************************");
         System.out.println(u1.toString());
 
 
@@ -56,6 +73,8 @@ public class TransferOwnAccount {
         relativeAge: Relative should be more then 18 years old
 
          */
+
+
     }
 
 

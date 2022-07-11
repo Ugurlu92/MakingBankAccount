@@ -1,18 +1,36 @@
 package TestClasses;
 
+import bankAccount.Account;
 import bankAccount.Users;
 
 public class TransferDifferentAccount {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Users u1 = new Users("David" , "Villa", "01/01/2000", "married" ,1000 , 2000);
 
-        Users u2 = new Users("Xavi" , "Hernandes", "1998", "single" ,3000 , 2000);
+        Users u2 = new Users("Xavi" , "Hernandes", "01/01/1998", "Single" ,3000 , 2000);
 
-       // u1.transfer(u1,u2);
+        u1.transfer(u1, u2, 0);
 
+        Account difAccount=new Account();
+
+        System.out.println(difAccount.transferOtherUser(u1, u2, 0));
+
+        int counter=5;
+
+        while (counter>=0) {
+            System.out.print("\rYour account report is getting prepared... " + counter);
+            counter--;
+            Thread.sleep(1000);
+
+        }
+
+
+        System.out.println();
+        System.out.println("*****************************");
         System.out.println(u1.toString());
+        System.out.println("-----------------------------");
         System.out.println(u2.toString());
 
 //        u1.amountAccount1==804

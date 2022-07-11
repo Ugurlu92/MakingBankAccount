@@ -19,6 +19,8 @@ public class Users {
     public int accountNumber2;
     public int amountAccount2;
 
+
+
     public Users(String name, String password, String dateOfBirth, String marriageStatus, int amountAccount1, int amountAccount2) {
         this.name = name;
         this.password = password;
@@ -30,40 +32,32 @@ public class Users {
         this.accountNumber2 = randomNumberCreater();
     }
 
-    /*public Users(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-     */
 
     public String CheckMariageStatus (String marriageStatus) {
         Scanner sc=new Scanner(System.in);
         String don="";
+
         if (marriageStatus.equalsIgnoreCase("Married")) {
-            System.out.print("Do you want to add add your relative? (Yes/No)");
+
+            System.out.print("Do you want to add add your relative? (Yes/No): ");
             String answer= sc.nextLine();
             if (answer.equalsIgnoreCase("Yes")) {
 
-                System.out.print("What is your relative name? : ");
+                System.out.print("What is your relative's name?: ");
                 String name= sc.nextLine();
                 //partner.fullName=relativeName;
 
-                System.out.print("What is the date of birth of your relative?: ");
+                System.out.print("What is your relative's date of birth?: ");
                 String birth= sc.nextLine();
                // partner.age=relativeAge;
-                AddRelative partner=new AddRelative(name, birth);
                 this.relativeName=name;
                 this.relativeAge=checkAge(birth);
+                don="Married";
 
+            } }
+            else if (marriageStatus.equalsIgnoreCase("single"))
+                don="Single";
 
-                if (relativeAge.equalsIgnoreCase("0")) {
-                    relativeName="Relative should be more then 18 years old";
-                    relativeAge="Relative should be more then 18 years old";
-                    don="Relative should be more then 18 years old"; }
-                else don="Transaction done successfully";
-
-            }
-        }
         return don;
     }
 
@@ -80,7 +74,7 @@ public class Users {
 
         if (age>=18){
 
-            return "You can get a credit card";
+            return myDOB;
         }
         else
 
@@ -139,35 +133,30 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", marriageStatus='" + marriageStatus + '\'' +
-                ", relativeName='" + relativeName + '\'' +
-                ", relativeAge='" + relativeAge + '\'' +
-                ", isTransferedSuceesfully='" + isTransferedSuceesfully + '\'' +
-                ", accountNumber=" + accountNumber +
-                ", amountAccount1=" + amountAccount1 +
-                ", accountNumber2=" + accountNumber2 +
-                ", amountAccount2=" + amountAccount2 +
-                '}';
+        return "Name= " + name + "\nSurname= " + password + "\nDate of Birth= " + dateOfBirth +
+                "\nMarital Status= " + CheckMariageStatus(marriageStatus)+ "\nYour Spouse's Name= " + relativeName + "\nYour Spouses's Birthday= " + relativeAge +
+                "\nAccount Number= " + accountNumber + "\nBalance=" + amountAccount1 + "\nAccount Number 2= " + accountNumber2 +
+                "\nBalance=" + amountAccount2;
     }
 
-    public void transfer (Users u1, Users u2) {
+    public void transfer (Users u1, Users u2, int transferAmount) {
         Scanner sc=new Scanner(System.in);
-        System.out.println("Do you want to transfer between your accounts or different user :");
+        Scanner sc2=new Scanner(System.in);
+        System.out.print("Do you want to transfer between your accounts or different user :");
         String cevap= sc.nextLine();
+
+        System.out.print("How much do you want to transfer? : ");
+        transferAmount=sc2.nextInt();
 
         if (cevap.equalsIgnoreCase("own"))
         {
-            Account.transferToOwnAccount(u1, 0);
+            Account.transferToOwnAccount(u1, transferAmount);
 
         }
 
-        if (cevap.equalsIgnoreCase("different"))
+        else if (cevap.equalsIgnoreCase("different"))
         {
-            Account.transferOtherUser(u1, u2, 0);
+            Account.transferOtherUser(u1, u2,transferAmount);
 
         }
 
