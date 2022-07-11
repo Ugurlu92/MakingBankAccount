@@ -20,7 +20,6 @@ public class Users {
     public int amountAccount2;
 
 
-
     public Users(String name, String password, String dateOfBirth, String marriageStatus, int amountAccount1, int amountAccount2) {
         this.name = name;
         this.password = password;
@@ -33,52 +32,53 @@ public class Users {
     }
 
 
-    public String CheckMariageStatus (String marriageStatus) {
-        Scanner sc=new Scanner(System.in);
-        String don="";
+    public String CheckMariageStatus(String marriageStatus) {
+        Scanner sc = new Scanner(System.in);
+        String don = "";
 
         if (marriageStatus.equalsIgnoreCase("Married")) {
 
             System.out.print("Do you want to add add your relative? (Yes/No): ");
-            String answer= sc.nextLine();
+            String answer = sc.nextLine();
             if (answer.equalsIgnoreCase("Yes")) {
 
                 System.out.print("What is your relative's name?: ");
-                String name= sc.nextLine();
+                String name = sc.nextLine();
                 //partner.fullName=relativeName;
 
                 System.out.print("What is your relative's date of birth?: ");
-                String birth= sc.nextLine();
-               // partner.age=relativeAge;
-                this.relativeName=name;
-                this.relativeAge=checkAge(birth);
-                don="Married";
+                String birth = sc.nextLine();
+                // partner.age=relativeAge;
+                this.relativeName = name;
+                this.relativeAge = checkAge(birth);
+                don = "Married";
 
-            } }
-            else if (marriageStatus.equalsIgnoreCase("single"))
-                don="Single";
+            }
+            if (answer.equalsIgnoreCase("No")) {
+              don="Married";
+            }
+        } if (marriageStatus.equalsIgnoreCase("Single")) {don="Single";};
 
         return don;
     }
 
-    public static String checkAge(String myDOB){
+    public static String checkAge(String myDOB) {
 
-        DateTimeFormatter format= DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date=LocalDate.parse(myDOB,format);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(myDOB, format);
 
-        LocalDate today=LocalDate.now();
+        LocalDate today = LocalDate.now();
 
-        Period difference=Period.between(date,today);
+        Period difference = Period.between(date, today);
 
-        int age=difference.getYears();
+        int age = difference.getYears();
 
-        if (age>=18){
+        if (age >= 18) {
 
             return myDOB;
-        }
-        else
+        } else
 
-            return  "You should be at least 18 years old to get a credit card.";
+            return "You should be at least 18 years old to get a credit card.";
 
       /*  LocalDate date = LocalDate.now();
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -125,41 +125,50 @@ public class Users {
         return result; */
 
     }
-    public static int randomNumberCreater () {
-        int hesapNo=(int) ((Math.random() * (99999999-10000000) + 1) + 10000000);
 
-      return hesapNo;
+    public static int randomNumberCreater() {
+        int hesapNo = (int) ((Math.random() * (99999999 - 10000000) + 1) + 10000000);
+
+        return hesapNo;
     }
 
     @Override
     public String toString() {
         return "Name= " + name + "\nSurname= " + password + "\nDate of Birth= " + dateOfBirth +
-                "\nMarital Status= " + CheckMariageStatus(marriageStatus)+ "\nYour Spouse's Name= " + relativeName + "\nYour Spouses's Birthday= " + relativeAge +
+                "\nMarital Status= " + this.marriageStatus + "\nYour Spouse's Name= " + relativeName + "\nYour Spouses's Birthday= " + relativeAge +
                 "\nAccount Number= " + accountNumber + "\nBalance=" + amountAccount1 + "\nAccount Number 2= " + accountNumber2 +
                 "\nBalance=" + amountAccount2;
     }
 
-    public void transfer (Users u1, Users u2, int transferAmount) {
-        Scanner sc=new Scanner(System.in);
-        Scanner sc2=new Scanner(System.in);
+    public void transferDifferent(Users u1, Users u2, int transferAmount) {
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
         System.out.print("Do you want to transfer between your accounts or different user :");
-        String cevap= sc.nextLine();
+        String cevap = sc.nextLine();
 
         System.out.print("How much do you want to transfer? : ");
-        transferAmount=sc2.nextInt();
+        transferAmount = sc2.nextInt();
 
-        if (cevap.equalsIgnoreCase("own"))
-        {
-            Account.transferToOwnAccount(u1, transferAmount);
 
-        }
-
-        else if (cevap.equalsIgnoreCase("different"))
-        {
-            Account.transferOtherUser(u1, u2,transferAmount);
+            Account.transferOtherUser(u1, u2, transferAmount);
 
         }
+
+
+
+
+    public void transferOwn(Users u1, int transferAmount) {
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+        System.out.print("Do you want to transfer between your accounts or different user :");
+        String cevap = sc.nextLine();
+
+        System.out.print("How much do you want to transfer? : ");
+        transferAmount = sc2.nextInt();
+
+        Account.transferToOwnAccount(u1, transferAmount);
 
 
     }
+
 }

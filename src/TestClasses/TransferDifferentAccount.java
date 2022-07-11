@@ -11,7 +11,7 @@ public class TransferDifferentAccount {
 
         Users u2 = new Users("Xavi" , "Hernandes", "01/01/1998", "Single" ,3000 , 2000);
 
-        u1.transfer(u1, u2, 0);
+        u1.transferDifferent(u1, u2, 0);
 
         Account difAccount=new Account();
 

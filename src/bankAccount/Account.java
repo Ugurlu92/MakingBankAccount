@@ -27,7 +27,7 @@ public class Account {
 
             sendingUser.amountAccount1-=transferAmount+(transferAmount*0.02);
             receivingUser.amountAccount1+=transferAmount;
-            donus="Transaction is completed successfully";
+            donus="**Transaction is completed successfully!**";
         }
         return donus;
     }

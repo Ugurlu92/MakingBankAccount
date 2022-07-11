@@ -17,7 +17,7 @@ public class TransferOwnAccount {
 
 
 
-        u1.transfer(u1, u1, 0);
+        u1.transferOwn(u1, 0);
 
        Account ownAccount=new Account();
 
@@ -31,8 +31,6 @@ public class TransferOwnAccount {
             Thread.sleep(1000);
 
         }
-
-
         System.out.println();
         System.out.println("*****************************");
         System.out.println(u1.toString());
